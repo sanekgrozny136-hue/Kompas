@@ -321,12 +321,27 @@ async def show_item(callback: CallbackQuery) -> None:
 
 # --- ЗАПУСК ---
 
+from aiohttp import web
+import os
+
+async def dummy_handler(request):
+    return web.Response(text="Bot is running!")
+
 async def main() -> None:
     logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     bot = Bot(token=BOT_TOKEN)
+    
+    # Поднимаем простой веб-сервер для бесплатного тарифа Render
+    app = web.Application()
+    app.router.add_get("/", dummy_handler)
+    runner = web.AppRunner(app)
+    await runner.setup()
+    port = int(os.environ.get("PORT", 8080))
+    site = web.TCPSite(runner, "0.0.0.0", port)
+    await site.start()
+
     print("Бот успешно запущен!")
     await dp.start_polling(bot)
-
 
 if __name__ == "__main__":
     asyncio.run(main())
