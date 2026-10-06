@@ -13,7 +13,8 @@ from aiogram.types import (
 )
 
 # ⚠️ Вставь сюда токен, полученный от @BotFather в Telegram
-BOT_TOKEN = "8875545427:AAGCKVrFK6wkjwdZbAuEH0mAR8PLn-sqGe8
+BOT_TOKEN = "8875545427:AAGCKVrFK6wkjwdZbAuEH0mAR8PLn-sqGe8"
+
 
 dp = Dispatcher()
 
